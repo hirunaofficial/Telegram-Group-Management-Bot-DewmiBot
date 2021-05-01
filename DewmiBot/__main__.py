@@ -206,7 +206,7 @@ def start(update: Update, context: CallbackContext):
             elif args[0][1:].isdigit() and "rules" in IMPORTED:
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
 
-        else:
+        else query.data == "aboutmanu_sltz":
             first_name = update.effective_user.first_name
             update.effective_message.reply_photo(
                 PM_IMG,
@@ -394,47 +394,17 @@ def DewmiBot_about_callback(update, context):
                             text="Help & Commands ❔", callback_data="help_back"
                         )
                     ],
-                    [InlineKeyboardButton(text="Back", callback_data="aboutmanu_back")],
+                    [InlineKeyboardButton(text="Back", callback_data="aboutmanu_sltz")],
                 ]
             ),
         )
     elif query.data == "aboutmanu_back":
-         first_name = update.effective_user.first_name
-            update.effective_message.reply_photo(
-                PM_IMG,
-                PM_START_TEXT.format(
-                    escape_markdown(first_name), escape_markdown(context.bot.first_name),
-                ),
-                parse_mode=ParseMode.MARKDOWN,
-                disable_web_page_preview=True,
-                reply_markup=InlineKeyboardMarkup(
-                   [
-    [
-                        InlineKeyboardButton(
-                             text=" 👪 Support Group ",
-                             url="https://t.me/sltechzoneofficial"),
-                         InlineKeyboardButton(
-                             text=" 🔔 Update Channel ",
-                             url="https://t.me/sltechzone")
-                    ],
-                    [
-                        InlineKeyboardButton(
-                            text=" 🙋 Help ",
-                            url="https://t.me/dewmibot?start=help"),
-                         InlineKeyboardButton(
-                            text=" ⚡️ Developer ",
-                             url="https://t.me/hirunaofficial")        
-                       
-                    ],
-                    [
-                        InlineKeyboardButton(
-                            text=" ➕ Add Me to Your Group ",
-                            url="t.me/dewmibot?startgroup=true")
-                    
-                    ],
-                    ],
-                ),
-            )
+        query.message.edit_text(
+            PM_START_TEXT,
+            reply_markup=InlineKeyboardMarkup(buttons),
+            parse_mode=ParseMode.MARKDOWN,
+            timeout=60,
+        )
 
     elif query.data == "aboutmanu_howto":
         query.message.edit_text(

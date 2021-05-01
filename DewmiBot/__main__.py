@@ -206,7 +206,7 @@ def start(update: Update, context: CallbackContext):
             elif args[0][1:].isdigit() and "rules" in IMPORTED:
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
 
-        else query.data == "aboutmanu_sltz":
+        else:
             first_name = update.effective_user.first_name
             update.effective_message.reply_photo(
                 PM_IMG,
@@ -394,7 +394,7 @@ def DewmiBot_about_callback(update, context):
                             text="Help & Commands ❔", callback_data="help_back"
                         )
                     ],
-                    [InlineKeyboardButton(text="Back", callback_data="aboutmanu_sltz")],
+                    [InlineKeyboardButton(text="Back", callback_data="aboutmanu_back")],
                 ]
             ),
         )

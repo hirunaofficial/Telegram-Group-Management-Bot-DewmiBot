@@ -96,6 +96,32 @@ DONATE_STRING = """
 You can donate to the developer of the *🌸 දෙව්මි උත්තරා 🌸*, [GD Hiruna](t.me/hirunaofficial)
 """
 
+BUTTONS = [
+                    [
+                        InlineKeyboardButton(
+                             text=" 👪 Support Group ",
+                             url="https://t.me/sltechzoneofficial"),
+                         InlineKeyboardButton(
+                             text=" 🔔 Update Channel ",
+                             url="https://t.me/sltechzone")
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text=" 🙋 Help ",
+                            url="https://t.me/dewmibot?start=help"),
+                         InlineKeyboardButton(
+                            text=" ⚡️ Developer ",
+                             url="https://t.me/hirunaofficial")        
+                       
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text=" ➕ Add Me to Your Group ",
+                            url="t.me/dewmibot?startgroup=true")
+                    
+                    ],
+            ]
+
 IMPORTED = {}
 MIGRATEABLE = []
 HELPABLE = {}
@@ -207,41 +233,12 @@ def start(update: Update, context: CallbackContext):
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
 
         else:
-            first_name = update.effective_user.first_name
             update.effective_message.reply_photo(
                 PM_IMG,
-                PM_START_TEXT.format(
-                    escape_markdown(first_name), escape_markdown(context.bot.first_name),
-                ),
+                PM_START_TEXT,
+                reply_markup=InlineKeyboardMarkup(BUTTONS),
                 parse_mode=ParseMode.MARKDOWN,
-                disable_web_page_preview=True,
-                reply_markup=InlineKeyboardMarkup(
-                   [
-    [
-                        InlineKeyboardButton(
-                             text=" 👪 Support Group ",
-                             url="https://t.me/sltechzoneofficial"),
-                         InlineKeyboardButton(
-                             text=" 🔔 Update Channel ",
-                             url="https://t.me/sltechzone")
-                    ],
-                    [
-                        InlineKeyboardButton(
-                            text=" 🙋 Help ",
-                            url="https://t.me/dewmibot?start=help"),
-                         InlineKeyboardButton(
-                            text=" ⚡️ Developer ",
-                             url="https://t.me/hirunaofficial")        
-                       
-                    ],
-                    [
-                        InlineKeyboardButton(
-                            text=" ➕ Add Me to Your Group ",
-                            url="t.me/dewmibot?startgroup=true")
-                    
-                    ],
-                    ],
-                ),
+                timeout=60, 
             )
     else:
         update.effective_message.reply_text(
@@ -400,8 +397,9 @@ def DewmiBot_about_callback(update, context):
         )
     elif query.data == "aboutmanu_back":
         query.message.edit_text(
+            PM_IMG,
             PM_START_TEXT,
-            reply_markup=InlineKeyboardMarkup(buttons),
+            reply_markup=InlineKeyboardMarkup(BUTTONS),
             parse_mode=ParseMode.MARKDOWN,
             timeout=60,
         )

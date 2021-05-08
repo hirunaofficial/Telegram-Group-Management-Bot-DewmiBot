@@ -25,14 +25,10 @@ async def download_coroutine(session, url, file_name, event, start, bot):
             return await response.release()
         await event.edit(
             """**Initiating Download**
-
 **URL:** {}
-
 **File Name:** {}
-
 **File Size:** {}
-
-**© @Dewmibot**""".format(
+**© @Infinity_BOTs**""".format(
                 url,
                 os.path.basename(file_name).replace("%20", " "),
                 humanbytes(total_length),
@@ -60,11 +56,8 @@ async def download_coroutine(session, url, file_name, event, start, bot):
                         if total_length < downloaded:
                             total_length = downloaded
                         current_message = """Downloading : {}%
-
 URL: {}
-
 File Name: {}
-
 File Size: {}
 Downloaded: {}
 ETA: {}""".format(
@@ -90,7 +83,7 @@ ETA: {}""".format(
 
 
 __help__ = """
- • `/up`*:* reply to a direct download link to upload it to telegram as files
+👉 `/up`*:* reply to a direct download link to upload it to telegram as files
  
 @dewmibot
 """

@@ -35,18 +35,16 @@ def _onUnMuteRequest(client, cb):
                     client.get_chat_member(channel, user_id)
                     client.unban_chat_member(chat_id, user_id)
                     cb.message.delete()
-                    # if cb.message.reply_to_message.from_user.id == user_id:
-                    # cb.message.delete()
                 except UserNotParticipant:
                     client.answer_callback_query(
                         cb.id,
-                        text=f"❗ අපේ @{channel} channel එකට Join වෙලා 'UnMute Me' button එක ආපහු ඔබන්න.",
+                        text=f"❗ Join our @{channel} channel and press 'UnMute Me' button.",
                         show_alert=True,
                     )
             else:
                 client.answer_callback_query(
                     cb.id,
-                    text="❗ ඔයාව වෙන හේතුවක් නිසා Admin ල mute කරලයි ඉන්නෙ.",
+                    text="❗ You have been muted by admins due to some other reason.",
                     show_alert=True,
                 )
         else:
@@ -62,7 +60,7 @@ def _onUnMuteRequest(client, cb):
             else:
                 client.answer_callback_query(
                     cb.id,
-                    text="❗ අවවාදයයි: ඔයාට කතාකරන්න පුලුවන්කම තියෙද්දි button එක click කරන්න එපා.",
+                    text="❗ Warning! Don't press the button when you cn talk.",
                     show_alert=True,
                 )
 
@@ -84,7 +82,7 @@ def _check_member(client, message):
             except UserNotParticipant:
                 try:
                     sent_message = message.reply_text(
-                        "Welcome {} 🙏 \n \n **You are Not Join Our Channel (@{}) Yet** 😭 \n Please Join Our Channel and Tough the Unmute me **UNMUTE ME** Button. \n \nආයුබෝවන් {} 🙏 \n \n **ඔයා අපේ @{} Channel එකට තාම Join වෙලා නෑ** 😭 \n කරුණාකරල ඒකට Join වෙලා පහල තියන **UNMUTE ME** Button එක touch කරන්න. \n \n **[👉 OUR CHANNEL 👈](https://t.me/{})**".format(
+                        "Welcome {} 🙏 \n **You havent joined our @{} Channel yet** 😭 \n \nPlease Join [Our Channel](https://t.me/{}) and hit the **UNMUTE ME** Button. \n \n ".format(
                             message.from_user.mention, channel, channel
                         ),
                         disable_web_page_preview=True,
@@ -92,9 +90,15 @@ def _check_member(client, message):
                             [
                                 [
                                     InlineKeyboardButton(
+                                        "Join Channel",
+                                        url="https://t.me/{}".format(channel),
+                                    )
+                                ],
+                                [
+                                    InlineKeyboardButton(
                                         "UnMute Me", callback_data="onUnMuteRequest"
                                     )
-                                ]
+                                ],
                             ]
                         ),
                     )
@@ -103,13 +107,13 @@ def _check_member(client, message):
                     )
                 except ChatAdminRequired:
                     sent_message.edit(
-                        "❗ **I havent any Admin Permision here..**\n__Give me Admin Permision and Try Again.. \n#Ending FSub...__"
+                        "❗ **DewmiBot is not admin here..**\n__Give me ban permissions and retry.. \n#Ending FSub...__"
                     )
 
             except ChatAdminRequired:
                 client.send_message(
                     chat_id,
-                    text=f"❗ **I havent Admin Permision on @{channel}.**\n__Give me Admin Permision and Try Again.\n#Leaving this chat...__",
+                    text=f"❗ **I not an admin of @{channel} channel.**\n__Give me admin of that channel and retry.\n#Ending FSub...__",
                 )
 
 
@@ -173,7 +177,8 @@ def config(client, message):
 
 __help__ = """
 *ForceSubscribe:*
-
+👉 DewmiBot can mute members who are not subscribed your channel until they subscribe
+👉 When enabled I will mute unsubscribed members and show them a unmute button. When they pressed the button I will unmute them
 *Setup*
 1) First of all add me in the group as admin with ban users permission and in the channel as admin.
 Note: Only creator of the group can setup me and i will not allow force subscribe again if not done so.
@@ -183,10 +188,8 @@ Note: Only creator of the group can setup me and i will not allow force subscrib
 👉 /ForceSubscribe no/off/disable - To turn of ForceSubscribe.
 👉 /ForceSubscribe {channel username} - To turn on and setup the channel.
 👉 /ForceSubscribe clear - To unmute all members who muted by me.
-
 Note: /FSub is an alias of /ForceSubscribe
 
-Sinhala and English Available 💭
-
+@dewmibot 
 """
 __mod_name__ = "📢 Force Subscribe 💭"

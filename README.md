@@ -7,5 +7,4 @@
 
 ## Credits
 
-- InukaAsith
 - SaitamaRobot

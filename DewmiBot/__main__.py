@@ -60,10 +60,8 @@ from DewmiBot.modules.helper_funcs.chat_status import is_user_admin
 from DewmiBot.modules.helper_funcs.misc import paginate_modules
 from DewmiBot.modules.helper_funcs.readable_time import get_readable_time
 
-PM_IMG = "https://telegra.ph/file/8cabfc3e05d3302d73dde.jpg"
-
 PM_START_TEXT = """
-Hi, my name is *🌸 දෙව්මි උත්තරා 🌸* !
+*Hi, my name is* 🌸 දෙව්මි උත්තරා [🌸](https://telegra.ph/file/8cabfc3e05d3302d73dde.jpg) !
 
 I am a Powerful Group Manager bot Developed by [GD Hiruna](t.me/hirunaofficial)
 
@@ -73,7 +71,7 @@ You can find my list of available commands with /help.
 """
 
 HELP_STRINGS = f"""
-*Main Commands :* 🤖
+*Main Commands :* [🤖](https://telegra.ph/file/8cabfc3e05d3302d73dde.jpg)
 Hey there! My name is *🌸 දෙව්මි උත්තරා 🌸*
 I'm Powerful BOT to Make Your Groups Secured and Organized & I help admins to manage their groups! Have a look at the following for an idea of some of \
 the things I can help you with.
@@ -233,8 +231,7 @@ def start(update: Update, context: CallbackContext):
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
 
         else:
-            update.effective_message.reply_photo(
-                PM_IMG,
+            update.effective_message.reply_text(
                 PM_START_TEXT,
                 reply_markup=InlineKeyboardMarkup(BUTTONS),
                 parse_mode=ParseMode.MARKDOWN,
@@ -373,7 +370,7 @@ def DewmiBot_about_callback(update, context):
             f"\n\n✍️ Join [SL Tech Zone](https://t.me/sltechzone) To Keep Yourself Updated About {dispatcher.bot.first_name}"
             f"\n\n💪 I have the normal GROUP MANAGING functions like flood control, a warning system etc but I mainly have the advanced and handy Antispam system and the SIBYL banning system which safegaurds and helps your group from spammers."
             f"\n\n👊 I Can Manage Your Groups Smoothly, With Some Special Features."
-            f"\n\n👇 More Informations 👇",
+            f"\n\n[👇](https://telegra.ph/file/8cabfc3e05d3302d73dde.jpg) You Can Know More About Me By Clicking The Below Buttons.",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
@@ -396,12 +393,11 @@ def DewmiBot_about_callback(update, context):
             ),
         )
     elif query.data == "aboutmanu_back":
-        query.message.edit_text.reply_photo(
-            PM_IMG,
-            PM_START_TEXT,
-            reply_markup=InlineKeyboardMarkup(BUTTONS),
-            parse_mode=ParseMode.MARKDOWN,
-            timeout=60,
+        query.message.edit_text(
+                PM_START_TEXT,
+                reply_markup=InlineKeyboardMarkup(BUTTONS),
+                parse_mode=ParseMode.MARKDOWN,
+                timeout=60,
         )
 
     elif query.data == "aboutmanu_howto":
